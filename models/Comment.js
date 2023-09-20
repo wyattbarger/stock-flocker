@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Stock extends Model {}
+class Comment extends Model {}
 
-Stock.init(
+Comment.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,27 +12,26 @@ Stock.init(
       autoIncrement: true,
     },
 
-    symbol: {
-      type: DataTypes.STRING,
+    text: {
+      type: DataTypes.STRING(1000),
       allowNull: false,
-      unique: true,
     },
-    // comments: {
-    //   type: DataTypes.ARRAY(DataTypes.INTEGER),
-    //   allowNull: true,
-    //   refrences: {
-    //     model: "comment",
-    //     key: "id",
-    //   },
-    // },
+
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
   },
   {
     sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "stock",
-  }
+    modelName: "comment",
+  },
 );
 
-module.exports = Stock;
+module.exports = Comment;
