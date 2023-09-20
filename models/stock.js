@@ -17,14 +17,14 @@ Stock.init(
       allowNull: false,
       unique: true,
     },
-    comments: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
-      allowNull: true,
-      refrences: {
-        model: "comment",
-        key: "id",
-      },
-    },
+    // comments: {
+    //   type: DataTypes.ARRAY(DataTypes.INTEGER),
+    //   allowNull: true,
+    //   refrences: {
+    //     model: "comment",
+    //     key: "id",
+    //   },
+    // },
   },
   {
     sequelize,

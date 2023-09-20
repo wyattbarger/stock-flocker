@@ -28,14 +28,14 @@ User.init(
       allowNull: false,
     },
 
-    comments: {
-        type: DataTypes.ARRAY(DataTypes.INTEGER),
-        allowNull: true,
-        refrences: {
-            model: 'comment',
-            key: 'id',
-        }
-    }
+    // comments: {
+    //     type: DataTypes.ARRAY(DataTypes.INTEGER),
+    //     allowNull: true,
+    //     refrences: {
+    //         model: 'comment',
+    //         key: 'id',
+    //     }
+    // }
   },
 
   {
