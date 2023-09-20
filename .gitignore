@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Added .DS_Store to keep unnecessary files from tracking
+.DS_Store
