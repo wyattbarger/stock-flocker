@@ -1,0 +1,61 @@
+/* Base color variables */
+:root {
+    --green-primary: #34D399;   /* A modern green */
+    --green-secondary: #14B28B; /* A darker shade for contrast */
+    --green-light: #DFFCFE;     /* A very light green, almost off-white for backgrounds */
+  }
+  
+  /* Background color for the main body */
+  body {
+    background-color: var(--green-light);
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: var(--green-primary);
+  }
+  
+  .navbar-item:hover, .navbar-link:hover {
+    background-color: var(--green-secondary);
+  }
+  
+  /* Buttons */
+  .button.is-primary, .button.is-link {
+    background-color: var(--green-primary);
+    border-color: transparent;
+    color: white;
+  }
+  
+  .button.is-primary:hover, .button.is-link:hover {
+    background-color: var(--green-secondary);
+    border-color: transparent;
+  }
+  
+  /* Form Box */
+  .box {
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  /* Tiles (if you use them) */
+  .tile.is-ancestor:not(.is-vertical) > .tile.is-parent:hover {
+    background-color: var(--green-secondary);
+    color: white;
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: var(--green-primary);
+    color: white;
+  }
+  
+  .footer a {
+    color: white;
+    text-decoration: underline;
+  }
+  
+  .footer a:hover {
+    color: var(--green-secondary);
+  }
+  
