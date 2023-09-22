@@ -27,8 +27,8 @@ Stock.init(
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
-    comments: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
+    comment_id: {
+      type: DataTypes.STRING,
       allowNull: true,
       refrences: {
         model: "comment",
