@@ -1,0 +1,20 @@
+[
+    {
+        "ticker": "APPL",
+        "company": "Apple",
+        "currentPrice": "124.32",
+        "historicalPrices": ["132.2", "123.4", "199.3"]
+    },
+    {
+        "ticker": "TWTR",
+        "company": "Twitter",
+        "currentPrice": "124.32",
+        "historicalPrices": ["132.2", "123.4", "199.3"]
+    },
+    {
+        "ticker": "MCRO",
+        "company": "Microsoft",
+        "currentPrice": "124.32",
+        "historicalPrices": ["132.2", "123.4", "199.3"]
+    }
+]
