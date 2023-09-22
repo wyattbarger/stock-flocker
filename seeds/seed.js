@@ -1,5 +1,5 @@
 const sequelize = require('../config/connection');
-const { User, Stock, HistoricalPrice } = require('../models');
+const { User, Stock, HistoricalPrice, Comment, Post, } = require('../models');
 
 const userData = require('./userData.json');
 const rawStockData = require('./stockData.json');
@@ -20,7 +20,7 @@ const seedDatabase = async () => {
     currentPrice: stock.currentPrice
   }));
 
-  const stocks = await Stock.bulkCreate(stockData, {
+  const stocks = await Stock.bulkCreate(rawStockData, {
     returning: true,
   });
 

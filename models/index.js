@@ -2,7 +2,7 @@ const User = require("./User");
 const Stock = require("./Stock");
 const Comment = require("./Comment");
 const Post = require("./post");
-const HistoricalPrice = require("./HistoricalPrice"); // Import the new model
+const HistoricalPrice = require("./HistoricalData"); // Import the new model
 
 // User and Comment Relationship
 User.hasMany(Comment, {

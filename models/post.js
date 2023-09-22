@@ -27,10 +27,10 @@ Post.init(
         },
       },
 
-    dateCreated: {
-        type: Date,
-        default: Date.now,
-    }
+    // dateCreated: {
+    //     type: Date,
+    //     default: Date.now,
+    // }
     // Add other columns as needed (e.g., date, author)
 
   },
