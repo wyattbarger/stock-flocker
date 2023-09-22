@@ -12,11 +12,25 @@ Stock.init(
       autoIncrement: true,
     },
 
-    symbol: {
+    ticker: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
     },
+
+    company: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    currentPrice: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+    },
+    // historicalPrices: {
+    //   type: DataTypes.ARRAY(DataTypes.STRING),
+    //   allowNull: false,
+    // },
     // comments: {
     //   type: DataTypes.ARRAY(DataTypes.INTEGER),
     //   allowNull: true,
