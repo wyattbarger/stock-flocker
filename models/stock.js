@@ -27,18 +27,14 @@ Stock.init(
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
-    // historicalPrices: {
-    //   type: DataTypes.ARRAY(DataTypes.STRING),
-    //   allowNull: false,
-    // },
-    // comments: {
-    //   type: DataTypes.ARRAY(DataTypes.INTEGER),
-    //   allowNull: true,
-    //   refrences: {
-    //     model: "comment",
-    //     key: "id",
-    //   },
-    // },
+    comment_id: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      refrences: {
+        model: "comment",
+        key: "id",
+      },
+    },
   },
   {
     sequelize,
