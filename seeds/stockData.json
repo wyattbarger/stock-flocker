@@ -1,20 +1,43 @@
 [
     {
-        "ticker": "APPL",
-        "company": "Apple",
-        "currentPrice": "124.32",
-        "historicalPrices": ["132.2", "123.4", "199.3"]
+
+      "ticker": "FLKR",
+      "company": "Flocker Corp",
+      "currentPrice": 150.25,
+      "historicalPrices": [
+        148.50, 149.75, 150.00, 151.25, 149.00
+      ]
     },
     {
-        "ticker": "TWTR",
-        "company": "Twitter",
-        "currentPrice": "124.32",
-        "historicalPrices": ["132.2", "123.4", "199.3"]
+      "ticker": "TECH",
+      "company": "TechTron Ltd",
+      "currentPrice": 75.50,
+      "historicalPrices": [
+        76.25, 74.50, 75.25, 76.00, 75.75
+      ]
     },
     {
-        "ticker": "MCRO",
-        "company": "Microsoft",
-        "currentPrice": "124.32",
-        "historicalPrices": ["132.2", "123.4", "199.3"]
+      "ticker": "GREN",
+      "company": "Green Energy Inc",
+      "currentPrice": 45.00,
+      "historicalPrices": [
+        44.75, 45.25, 45.50, 45.25, 44.50
+      ]
+    },
+    {
+      "ticker": "CASH",
+      "company": "CashMakers Holdings",
+      "currentPrice": 100.00,
+      "historicalPrices": [
+        99.75, 100.25, 101.00, 100.50, 100.25
+      ]
+    },
+    {
+      "ticker": "MOVE",
+      "company": "Movements Group",
+      "currentPrice": 200.75,
+      "historicalPrices": [
+        201.50, 200.25, 200.00, 199.75, 201.25
+      ]
     }
-]
+  ]
