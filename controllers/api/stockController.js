@@ -1,4 +1,4 @@
-const { Stock, HistoricalPrice } = require('../models');
+const { Stock, HistoricalPrice } = require('../../models');
 
 const stockController = {
   // Get all stocks
