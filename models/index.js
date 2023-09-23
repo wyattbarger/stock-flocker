@@ -48,4 +48,4 @@ HistoricalPrice.belongsTo(Stock, {
   foreignKey: "stock_id",
 });
 
-module.exports = { User, Comment, Stock, HistoricalPrice }; // Export all the models
+module.exports = { User, Comment, Stock, HistoricalPrice, Post }; // Export all the models

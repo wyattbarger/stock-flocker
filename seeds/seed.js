@@ -3,6 +3,8 @@ const { User, Stock, HistoricalPrice, Comment, Post, } = require('../models');
 
 const userData = require('./userData.json');
 const rawStockData = require('./stockData.json');
+const postData = require('./postData.json');
+const commentData = require('./commentData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -37,6 +39,14 @@ const seedDatabase = async () => {
 
     await HistoricalPrice.bulkCreate(historicalPrices);
   }
+
+  await Post.bulkCreate(postData, {
+    returning: true,
+  });
+
+  await Comment.bulkCreate(commentData, {
+    returning: true,
+  });
 
   process.exit(0);
 };
