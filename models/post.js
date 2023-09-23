@@ -26,6 +26,13 @@ Post.init(
           key: "id",
         },
       },
+      stock_id: {
+        type: DataTypes.INTEGER,
+        reference: {
+          model: "stock",
+          key: "id",
+        }
+      }
 
     // dateCreated: {
     //     type: Date,

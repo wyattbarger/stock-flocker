@@ -31,12 +31,12 @@ Comment.belongsTo(Post, {
   foreignKey: "post_id",
 });
 
-// Stock and Comment Relationship
-Stock.hasMany(Comment, {
+// Stock and post Relationship
+Stock.hasMany(Post, {
   foreignKey: "stock_id",
   onDelete: "CASCADE",
 });
-Comment.belongsTo(Stock, { foreignKey: "stock_id" });
+Post.belongsTo(Stock, { foreignKey: "stock_id" });
 
 // Stock and HistoricalPrice Relationship
 Stock.hasMany(HistoricalPrice, {

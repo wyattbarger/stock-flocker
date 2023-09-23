@@ -1,5 +1,27 @@
 [
     {
-        
+        "text": "Wait, your girlfriend's husband? What's going on here...",
+        "user_id": "2",
+        "post_id": "1"
+    },
+    {
+        "text": "Yeah. He works all day at Chase. Worked, I mean.",
+        "user_id": "1",
+        "post_id": "1"
+    },
+    {
+        "text": "Oh I hate Chase. They didn't give me an auto loan. Good riddance.",
+        "user_id": "2",
+        "post_id": "1"
+    },
+    {
+        "text": "Too bad european cheese isn't a publically traded stock. What the hell are you even doing here?",
+        "user_id": "2",
+        "post_id": "2"
+    },
+    {
+        "text": "Oh boo hoo. Try saving the planet a little bit, asshole. It's making me more money",
+        "user_id": "1",
+        "post_id": "3"
     }
 ]
