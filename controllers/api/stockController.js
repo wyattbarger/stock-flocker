@@ -1,4 +1,5 @@
 const { Stock, HistoricalPrice } = require('../../models');
+const router = require('express').Router(); // Import the router object of express with const 'router'.
 
 const stockController = {
   // Get all stocks

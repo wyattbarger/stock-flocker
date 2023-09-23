@@ -1,13 +1,11 @@
 const router = require('express').Router();
 
 // Import all the individual route files
-const stockRoutes = require('../routes/stockRoutes');
-const userRoutes = require('../routes/userRoutes');
-const commentRoutes = require('../routes/commentRoutes');
+const apiRoutes = require('./api')
+const homeRoutes = require('./homeController');
 
 // Use these routes
-router.use('/stocks', stockRoutes);
-router.use('/users', userRoutes);
-router.use('/comments', commentRoutes);
+router.use('/api', apiRoutes); // Named and declared router for the /api
+router.use('/', homeRoutes); // Named and declared router for the / route
 
 module.exports = router;

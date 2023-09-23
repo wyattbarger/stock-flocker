@@ -1,4 +1,5 @@
 const { User, Comment } = require('../../models');
+const router = require('express').Router(); // Import the router object of express with const 'router'.
 
 const userController = {
   // Get all users
