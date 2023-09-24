@@ -32,6 +32,7 @@ app.engine('handlebars', hbs.engine);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('views', path.join(__dirname, 'views')); // Set the template engine to render views from the views directory with our routes defined in /controllers.
 
 app.use(routes);
 
