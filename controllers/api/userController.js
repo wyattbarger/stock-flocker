@@ -27,10 +27,12 @@ router.get('/users/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
-  
-  
+ 
+router.get('/register', (req,res) => { // Added a GET route that will show the register page when the route /api/users/register is hit.
+  res.render('register', {layout: 'main' }); // Added code to properly target the register view while utilizing the main layout, created by jdgiancola. 
+});
 
-  // ... additional CRUD operations as necessary ...
+// ... additional CRUD operations as necessary ...
 
 
 module.exports = router;
