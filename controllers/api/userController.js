@@ -1,21 +1,20 @@
 const { User, Comment } = require('../../models');
 const router = require('express').Router(); // Import the router object of express with const 'router'.
 
-const userController = {
-  // Get all users
-  getAllUsers: async (req, res) => {
-    try {
-      const users = await User.findAll({
-        include: [{ model: Comment }]
-      });
-      res.status(200).json(users);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  },
+
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.findAll({
+      include: [{ model: Comment }]
+    });
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}); 
 
   // Get a single user by ID
-  getUserById: async (req, res) => {
+  router.get('/users/:id', async (req, res) => {
     try {
       const user = await User.findByPk(req.params.id, {
         include: [{ model: Comment }]
@@ -27,9 +26,9 @@ const userController = {
     } catch (err) {
       res.status(500).json(err);
     }
-  },
+  }); 
 
   // ... additional CRUD operations as necessary ...
-};
 
-module.exports = userController;
+
+module.exports = router;
