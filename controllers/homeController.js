@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
             order: [['company', 'ASC']], // Order the results by the company name.
         });
         try { // Added try catch to test for errors rendering the homepage.
-        res.render('homepage', {stockPrices}); // Added res.render to render the homepage template and pass it stockPrices.
+        res.render('layouts/main', { layout: 'main', stockPrices}); // Added res.render to render the main template and pass it stockPrices. Accomplished by pathing into layouts setting the view as main, using the same layout.
         } catch (err) {
             console.error(err);
             res.status(500).json({ message: 'There was an error rendering the homepage!' });
