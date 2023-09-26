@@ -3,8 +3,7 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-// Here, I'm assuming you have a module to provide the stock data. 
-// For simplicity, let's assume the stocks.json you've got is being used.
+// Assume stocks.json is in the same directory for providing stock data.
 const stockData = require('./stocks.json');
 
 const app = express();
@@ -32,13 +31,54 @@ app.get('/register', (req, res) => {
     res.render('register', { title: 'Register for Stock Flocker' });
 });
 
-app.post('/register', (req, res) => {
-    // Registration logic goes here. Store user data, etc.
-    // For this example, just redirect to home after "registering".
-    res.redirect('/');
+
+app.post('/register', async (req, res) => {
+    try {
+        // Validate the request body here. Make sure all necessary fields are present.
+        if (!req.body.username || !req.body.password) {
+            throw new Error('Username and password are required');
+        }
+
+        // Hash the password with bcrypt
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+        // Now save the user to the database. Assume a create method on User model.
+        const user = await User.create({
+            username: req.body.username,
+            password: hashedPassword
+        });
+
+        // If registration is successful, store user info in session and redirect to home
+        if (user) {
+            req.session.userId = user.id;
+            res.redirect('/');
+        }
+    } catch (error) {
+        // If an error occurred, render the registration page with an error message
+        res.status(400).render('register', { error: error.toString() });
+    }
 });
 
-// Assuming other routes like login, dashboard, etc.
+app.get('/login', (req, res) => {
+    res.render('login', { title: 'Login to Stock Flocker' });
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        // Use the findByCredentials method on the User model to find the user.
+        const user = await User.findByCredentials(req.body.username, req.body.password);
+
+        // If user is found, save user info in session
+        if (user) {
+            req.session.userId = user.id;
+            res.redirect('/dashboard');
+        } else {
+            res.status(400).render('login', { error: 'Invalid login credentials.' });
+        }
+    } catch (error) {
+        res.status(500).send(error.toString());
+    }
+});
 
 // Start the server
 const PORT = process.env.PORT || 3001;
