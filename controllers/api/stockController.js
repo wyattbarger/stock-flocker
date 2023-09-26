@@ -7,6 +7,8 @@ const router = require('express').Router(); // Import the router object of expre
       const stocks = await Stock.findAll({
         include: [{ model: HistoricalPrice, as: 'historicalPrices' }]
       });
+      const stock = stocks.map((product) => product.get({plain: true}))
+      res.render('stockPage', {layout: 'main', stock});gi
       res.status(200).json(stocks);
     } catch (err) {
       res.status(500).json(err);
