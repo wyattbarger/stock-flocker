@@ -32,6 +32,15 @@ router.get('/register', (req,res) => { // Added a GET route that will show the r
   res.render('register', {layout: 'main' }); // Added code to properly target the register view while utilizing the main layout, created by jdgiancola. 
 });
 
+router.get('/login', async (req,res) => {
+  try
+})
+
+router.post('/login', async (req,res) => { // Added a POST route for logging in.
+  try {
+    const userInfo = await User.fineOne({where: { username: req.body.username} }); // Added code to find one user based on their username, this will be given an unique property in the model 
+  }
+})
 // ... additional CRUD operations as necessary ...
 
 
