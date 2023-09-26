@@ -1,7 +1,7 @@
 const User = require("./User");
 const Stock = require("./Stock");
 const Comment = require("./Comment");
-const Post = require("./post");
+const Post = require("./Post");
 const HistoricalPrice = require("./HistoricalData"); // Import the new model
 
 // User and Comment Relationship
