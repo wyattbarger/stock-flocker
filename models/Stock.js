@@ -35,6 +35,11 @@ Stock.init(
         key: "id",
       },
     },
+    imageFilename: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
   },
   {
     sequelize,
