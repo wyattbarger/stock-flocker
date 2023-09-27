@@ -37,7 +37,7 @@ Stock.init(
     },
     imageFilename: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       unique: true,
     },
   },

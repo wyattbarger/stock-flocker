@@ -1,8 +1,8 @@
-const { Stock, HistoricalPrice } = require('../../models');
+const { Stock, HistoricalPrice, Post } = require('../../models');
 const router = require('express').Router(); // Import the router object of express with const 'router'.
 
 
-  router.get('/stock', async (req, res) => {
+  router.get('/', async (req, res) => {
     try {
       const stocks = await Stock.findAll({
         include: [{ model: HistoricalPrice, as: 'historicalPrices' }]
@@ -15,7 +15,7 @@ const router = require('express').Router(); // Import the router object of expre
     }
   }); 
 
-  router.get('/stock/id:', async (req, res) => {
+  router.get('/:id', async (req, res) => {
     try {
       const stock = await Stock.findByPk(req.params.id, {
         include: [{ model: HistoricalPrice, as: 'historicalPrices' }]
@@ -28,6 +28,21 @@ const router = require('express').Router(); // Import the router object of expre
       res.status(500).json(err);
     }
   });
+
+  router.get('/:id/posts', async (req, res) => {
+    try {
+      const stock = await Stock.findByPk(req.params.id, {
+        include: [ Post ]
+      });
+      
+      if (!stock.posts || stock.posts.length === 0) {
+        return res.status(404).json({ message: 'Stock has no posts...yet!' });
+      }
+      res.status(200).json(stock);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+})
 
   router.post('/',async (req, res) => {
     try {
