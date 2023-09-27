@@ -27,10 +27,6 @@ router.get('/comment/:id', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-// Check discord for Andrews delete code block.
-// ... additional CRUD operations as necessary ...
-=======
 // finish and test this route in insomnia
 router.post('/post/:id', withAuth, async (req, res) => {
   try {
@@ -50,7 +46,6 @@ router.post('/post/:id', withAuth, async (req, res) => {
 
 
   // ... additional CRUD operations as necessary ...
->>>>>>> main
 
 
 module.exports = router;
