@@ -27,8 +27,8 @@ router.get('/comment/:id', async (req, res) => {
   }
 });
 
-
-  // ... additional CRUD operations as necessary ...
+// Check discord for Andrews delete code block.
+// ... additional CRUD operations as necessary ...
 
 
 module.exports = router;
