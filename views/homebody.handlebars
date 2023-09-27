@@ -8,26 +8,20 @@
     <title>Home - Stock Flocker</title>
 </head>
 <body>
-    <nav class="navbar is-primary">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="/">
-                Stock Flocker
-            </a>
-        </div>
-        <div class="navbar-menu">
-            <div class="navbar-end">
-                <a class="navbar-item" href="/">Home</a>
-                <a class="navbar-item" href="/dashboard">Dashboard</a>
-            </div>
-        </div>
-    </nav>
 
-    <main class="section">
+  <main class="section">
         <div class="container">
             <div class="columns is-multiline">
                 {{#each stocks as |stock|}}
                     <div class="column is-one-third">
                         <div class="card">
+                            <!-- Adding image here -->
+                            <div class="card-image">
+                                <figure class="image is-4by3">
+                                  <!-- Updated src attribute -->
+                                  <img src="images/{{stock.imageFilename}}" alt="{{stock.company}} logo">
+                                </figure>
+                            </div>
                             <div class="card-content">
                                 <h5 class="title">{{stock.company}} ({{stock.ticker}})</h5>
                                 <p>Current Price: ${{stock.currentPrice}}</p>
@@ -40,10 +34,5 @@
         </div>
     </main>
 
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p>&copy; 2023 Stock Flocker. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>

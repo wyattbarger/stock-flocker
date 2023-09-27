@@ -17,15 +17,6 @@ router.get('/', async (req, res) => {
         console.error(err); // Log for any errors that may occur.
         res.status(500).json({ message: 'Internal server error.'}) // Display a message to the user in the case of a bad 
     }
-
-        const stock = stockPrices.map((product) => product.get({ plain: true })) // Added .map to stockPrices so that the data will pass properly as an array.
-        res.render('homebody', { layout: 'main', stock}); // Added res.render to render the main template and pass it stockPrices. Accomplished by pathing into layouts setting the view as main, using the same layout.
-        console.log(stockPrices);
-        } catch (err) {
-            console.error(err);
-            res.status(500).json({ message: 'There was an error rendering the homepage!' });
-        }
-
 });
 
 module.exports = router; // Added module.exports allow the routes defined here to be used elsewhere in the application.
