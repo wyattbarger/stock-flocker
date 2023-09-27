@@ -27,14 +27,14 @@ Stock.init(
       type: DataTypes.DECIMAL,
       allowNull: false,
     },
-    comment_id: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      refrences: {
-        model: "comment",
-        key: "id",
-      },
-    },
+    // comment_id: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    //   refrences: {
+    //     model: "comment",
+    //     key: "id",
+    //   },
+    // },
     imageFilename: {
       type: DataTypes.STRING,
       allowNull: true,
