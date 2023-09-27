@@ -1,13 +1,14 @@
-const router = require('express').Router(); // Import the router object of express with const 'router'.
-const {Stock} = require('../models'); // Import the Stock model using a deconstructor in case jdgiancola needs the data on the front-end. 
+const router = require("express").Router(); // Import the router object of express with const 'router'.
+const { Stock } = require("../models"); // Import the Stock model using a deconstructor in case jdgiancola needs the data on the front-end.
 // GET router for the homepage of the web app.
-router.get('/', async (req, res) => {
-    try { // Added try-catch block to handle potential errors. 
-        const stockPrices = await Stock.findAll({ // Declare stockPrices const to get stock data.
-            attributes: { include: ['id', 'ticker', 'company', 'currentPrice']}, // Added the attributes as outlined in the Stock model.
-            order: [['company', 'ASC']], // Order the results by the company name.
-        });
-
+router.get("/", async (req, res) => {
+  try {
+    // Added try-catch block to handle potential errors.
+    const stockPrices = await Stock.findAll({
+      // Declare stockPrices const to get stock data.
+      attributes: { include: ["id", "ticker", "company", "currentPrice"] }, // Added the attributes as outlined in the Stock model.
+      order: [["company", "ASC"]], // Order the results by the company name.
+    });
 
          const stocks = stockPrices.map((stock) => stock.get({ plain: true }));
          // Added try catch to test for errors rendering the homepage.
