@@ -37,10 +37,21 @@ router.get('/login', async (req,res) => {
 })
 
 router.post('/login', async (req,res) => { // Added a POST route for logging in.
-  try {
-    const userInfo = await User.fineOne({where: { username: req.body.username} }); // Added code to find one user based on their username, this will be given an unique property in the model 
+  try { // Added try-catch to handle errors.
+    const userInfo = await User.fineOne({where: { username: req.body.username} }); // Added code to find one user based on their username, this has been given an unique property in the model
+    if (!userInfo) { // Added a condition to make the the user info matches what is on record based on the the username, which was defined as unique by andmell in models/user.js.
+      res.status(400).json({ message: 'Wrong username or password, please try again!' }); // Tell the user they entered some of their info incorrect and return.
+      return;
+    }
+    req.session.save(() => { // If the users enters the correct info, save the session
+      req.session.user_id = userInfo.id; // Store the session based on the user id that logged in.
+      req.session.logged_in = true; // Set the session logged_in property to true so that users can view pages requiring authentication.
+      res.json({ user: userInfo, message: 'You have successfully logged in. Welcome to Stock Flocker!'});
+    });
+  } catch (err) { 
+    res.status(400).json(err);
   }
-})
+});
 // ... additional CRUD operations as necessary ...
 
 
