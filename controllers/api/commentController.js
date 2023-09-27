@@ -1,4 +1,4 @@
-const { Comment, User, Stock } = require('../../models');
+const { Comment, User, Stock, Post } = require('../../models');
 const router = require('express').Router(); // Import the router object of express with const 'router'.
 const withAuth = require('../../auth')
 
@@ -27,13 +27,22 @@ router.get('/comment/:id', async (req, res) => {
   }
 });
 
-router.post('/', withAuth, async (req, res) => {
+// finish and test this route in insomnia
+router.post('/post/:id', withAuth, async (req, res) => {
   try {
+    const postId = req.params.post_id;
+    const user = req.user.id;
+    const content = req.body;
     const newComment = await Comment.create({
-      
-    })
+      content,
+      postId,
+      user
+    });
+    res.status(201).json(comment)
+  } catch (err) {
+    res.status(500).json('We had trouble posting your comment. Try again?')
   }
-})
+});
 
 
   // ... additional CRUD operations as necessary ...
