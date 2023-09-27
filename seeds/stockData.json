@@ -30,7 +30,8 @@
       "currentPrice": 100.00,
       "historicalPrices": [
         99.75, 100.25, 101.00, 100.50, 100.25
-      ]
+      ],
+      "imageFilename": "CASH.png"
     },
     {
       "ticker": "MOVE",
