@@ -2,7 +2,7 @@ const { User, Comment } = require('../../models');
 const router = require('express').Router(); // Import the router object of express with const 'router'.
 
 
-router.get('/users', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const users = await User.findAll({
       include: [{ model: Comment }]
@@ -14,7 +14,7 @@ router.get('/users', async (req, res) => {
 }); 
 
 // Get a single user by ID
-router.get('/users/:id', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const user = await User.findByPk(req.params.id, {
       include: [{ model: Comment }]
@@ -50,14 +50,12 @@ router.post('/register', async (req,res) => {
   }
 });
 
+//NOTE: 
 
-router.get('/login', async (req,res) => {
-    res.render('login', {layout: 'main'}); // Added code to render the login route with the main layout, created by jdgiancola.
-})
 
 router.post('/login', async (req,res) => { // Added a POST route for logging in.
   try { // Added try-catch to handle errors.
-    const userInfo = await User.fineOne({where: { username: req.body.username} }); // Added code to find one user based on their username, this has been given an unique property in the model
+    const userInfo = await User.findOne({where: { username: req.body.username} }); // Added code to find one user based on their username, this has been given an unique property in the model
     if (!userInfo) { // Added a condition to make the the user info matches what is on record based on the the username, which was defined as unique by andmell in models/user.js.
       res.status(400).json({ message: 'Wrong username or password, please try again!' }); // Tell the user they entered some of their info incorrect and return.
       return;
