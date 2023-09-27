@@ -32,6 +32,25 @@ router.get('/register', (req,res) => { // Added a GET route that will show the r
   res.render('register', {layout: 'main'}); // Added code to properly target the register view while utilizing the main layout, created by jdgiancola. 
 });
 
+router.post('/register', async (req,res) => {
+  try { // Added a try-catch block to handle errors.
+  const notUniqueName = await User.findOne({ where: { username: req.body.username }}); // Added a const called notUniqueName to search for an existing user, based on the username the potential new user is attempting to register under. 
+  if (notUniqueName) { // Added a conditional to check is the username is unique or not. 
+    return res.status(400).json({ message: 'Someone has already registered with that username. Please try again.'}) // If the conditional is met inform the user they need to try a different username for registration.
+  }
+  const newUser = await User.create(req.body); // Added code to create the new user using the User model, assuming the above conditional is not met.
+  req.session.save(() => { // Similar to the block in the /login POST, however in this case we are now logging a user in after successful registration, and storing the express-session.
+    req.session.user_id = userData.id;
+    req.session.logged_in = true;
+
+    res.status(200).json(userData);
+  });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+
 router.get('/login', async (req,res) => {
     res.render('login', {layout: 'main'}); // Added code to render the login route with the main layout, created by jdgiancola.
 })
