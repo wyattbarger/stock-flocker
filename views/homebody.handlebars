@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="../public/Stylesheets/main.css">
+    <title>Home - Stock Flocker</title>
+    <style>
+        /* Add custom style to ensure all cards have the same height */
+        .card {
+            height: 100%; /* Make the card take up the full height of its container */
+            display: flex;
+            flex-direction: column;
+            /* Add a green glowing shadow */
+            box-shadow: 0 0 10px 2px limegreen;
+            transition: box-shadow 0.3s ease;
+        }
+        .card-content {
+            flex-grow: 1; /* Make the card content grow to take up available space */
+        }
+         /* Increase the glow when the card is hovered over */
+        .card:hover {
+            box-shadow: 0 0 15px 4px limegreen;
+        }
+    </style>
+</head>
+<body>
+    
+    <main class="section">
+        <div class="container">
+            <div class="columns is-multiline">
+                {{#each stocks as |stock|}}
+                    <div class="column is-one-third">
+                        <div class="card">
+                            <div class="card-content">
+                                <h5 class="title">{{stock.company}} ({{stock.ticker}})</h5>
+                                <p>Current Price: ${{stock.currentPrice}}</p>
+                                <a href="/stock/{{stock.id}}" class="button is-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </main>
+
+    </footer>
+</body>
+</html>
