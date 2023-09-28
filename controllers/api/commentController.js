@@ -2,30 +2,33 @@ const { Comment, User, Stock, Post } = require('../../models');
 const router = require('express').Router(); // Import the router object of express with const 'router'.
 const withAuth = require('../../auth')
 
-router.get('/comments', async (req, res) => {
-  try {
-    const comments = await Comment.findAll({
-      include: [{ model: User }, { model: Stock }]
-    });
-    res.status(200).json(comments);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get('/comments', async (req, res) => {
+//   try {
+//     const comments = await Comment.findAll({
+//       include: [{ model: User }, { model: Stock }]
+//     });
+//     res.status(200).json(comments);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+// Unecessary route commented out.
 
-router.get('/comment/:id', async (req, res) => {
-  try {
-    const comment = await Comment.findByPk(req.params.id, {
-      include: [{ model: User }, { model: Stock }]
-    });
-    if (!comment) {
-      return res.status(404).json({ message: 'Comment not found!' });
-    }
-    res.status(200).json(comment);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get('/comment/:id', async (req, res) => {
+//   try {
+//     const comment = await Post.findByPk(req.params.id, {
+//       where: ,
+//       include: [{ model: User }, { model: Stock }]
+//     });
+//     if (!comment) {
+//       return res.status(404).json({ message: 'Comment not found!' });
+//     }
+//     res.status(200).json(comment);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+// Unecessary route commented out.
 
 // finish and test this route in insomnia
 router.post('/post/:id', withAuth, async (req, res) => {
@@ -33,7 +36,7 @@ router.post('/post/:id', withAuth, async (req, res) => {
     const postId = req.params.post_id;
     const user = req.user.id;
     const content = req.body;
-    const newComment = await Comment.create({
+    const newComment = await Comment.create({ // The instances on content here may need changed to text if it can't communicate with the database
       content,
       postId,
       user
@@ -43,11 +46,11 @@ router.post('/post/:id', withAuth, async (req, res) => {
     res.status(500).json('We had trouble posting your comment. Try again?')
   }
 });
-
-router.put('/edit/comment/:id', withAuth, async (req,res) => { // Added put route for a authenticated user to update their choosen comment.
+// The below put route was tested in insomnia and confirmed to work with MySql workbench.
+router.put('/edit/:id', withAuth, async (req,res) => { // Added put route for a authenticated user to update their choosen comment.
   try { // Added a try-catch block for handling errors.
     const commentId = req.params.id; // Declare commentId variable set to request the comment id. 
-    const content = req.body.text; // Declare content variable set to the users updated text.
+    const text = req.body.text; // Declare content variable set to the users updated text.
     const editedComment = await Comment.update(
       {text}, // Update the data stored in the text column of the Comment model that has been selected based off of the current comment id.
       { where: { id: commentId }}
@@ -57,13 +60,12 @@ router.put('/edit/comment/:id', withAuth, async (req,res) => { // Added put rout
     res.status(500).json({ message: 'We were unable to process you edit request. Please try again later.'}) // Log that the edit request was unseccessful.
   } 
 });
-
-router.delete('/delete/comment/:id', withAuth, async (req,res) => { // Added a route to delete a comment based on the comments id.
+// Tested this route in Insomnia and MySql workebench, both confirmed working.
+router.delete('/delete/:id', withAuth, async (req,res) => { // Added a route to delete a comment based on the comments id.
   try { // Added a try-catch block for handling errors.
     const comment = await Comment.destroy({ // Declare a variable using the destroy method to delete the choosen comment.
       where: {
         id: req.params.id, // Added parameters so that the deleted comment targeted is done so with req.params.id, an double checks that the user is deleting a comment that belongs to them, and not someone else's.
-        user_id: req.session.user_id,
       },
     });
     if (!comment) { // Added a conditional so that the user is notified the comment they are trying to delete is unable to be found with the choosen id.

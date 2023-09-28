@@ -27,10 +27,6 @@ router.get('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
- 
-router.get('/register', (req,res) => { // Added a GET route that will show the register page when the route /api/users/register is hit.
-  res.render('register', {layout: 'main'}); // Added code to properly target the register view while utilizing the main layout, created by jdgiancola. 
-});
 
 router.post('/register', async (req,res) => {
   try { // Added a try-catch block to handle errors.

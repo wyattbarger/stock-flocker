@@ -23,6 +23,10 @@ router.get("/", async (req, res) => {
 //NOTE moved to homecontroller.js as it's not an API call.
 router.get('/login', async (req,res) => {
   res.render('login', {layout: 'main'}); // Added code to render the login route with the main layout, created by jdgiancola.
-})
+});
+
+router.get('/register', (req,res) => { // Added a GET route that will show the register page when the route /api/users/register is hit.
+  res.render('register', {layout: 'main'}); // Added code to properly target the register view while utilizing the main layout, created by jdgiancola. 
+});
 
 module.exports = router; // Added module.exports allow the routes defined here to be used elsewhere in the application.
