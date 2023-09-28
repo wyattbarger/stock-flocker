@@ -38,7 +38,7 @@ router.post('/post/:id', withAuth, async (req, res) => {
       postId,
       user
     });
-    res.status(201).json(comment)
+    res.status(201).json(newComment) // Changed comment to newComment to properly pass the newComment variable declared in line 36 with the 201 response.
   } catch (err) {
     res.status(500).json('We had trouble posting your comment. Try again?')
   }
