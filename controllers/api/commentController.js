@@ -44,8 +44,21 @@ router.post('/post/:id', withAuth, async (req, res) => {
   }
 });
 
+router.put('/edit/comment/id:', withAuth, async (req,res) => { // Added put route for a authenticated user to update their choosen comment.
+  try { // Added a try-catch block for handling errors.
+    const commentId = req.params.id; // Declare commentId variable set to request the comment id. 
+    const content = req.body.text; // Declare content variable set to the users updated text.
+    const editedComment = await Comment.update(
+      {text},
+      { where: { id: commentId }}
+    );
+    res.status(200).json({ messaage: 'Your changes have been updated.' })
+  } catch (err) {
+    res.status(500).json({ message: 'We were unable to process you edit request. Please try again later.'})
+  } 
+});
 
-  // ... additional CRUD operations as necessary ...
+// ... additional CRUD operations as necessary ...
 
 
 module.exports = router;
