@@ -44,5 +44,15 @@
         201.50, 200.25, 200.00, 199.75, 201.25
       ],
       "imageFilename": "move.png"
+    },
+    {
+      "ticker": "BKAWK",
+      "company": "Cluck Cluck Chicken Suits",
+      "currentPrice": 60.90,
+      "historicalPrices": [
+        10.40, 7.10, 370.35, 155.67, 40.12
+      ],
+      "imageFilename": "BKAWK.png"
+
     }
   ]
