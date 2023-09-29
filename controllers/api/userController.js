@@ -63,7 +63,10 @@ router.post('/login', async (req,res) => { // Added a POST route for logging in.
     req.session.save(() => { // If the users enters the correct info, save the session
       req.session.user_id = userInfo.id; // Store the session based on the user id that logged in.
       req.session.logged_in = true; // Set the session logged_in property to true so that users can view pages requiring authentication.
-      res.json({ user: userInfo, message: 'You have successfully logged in. Welcome to Stock Flocker!'});
+      // res.status(200).json({ user: userInfo, message: 'You have successfully logged in. Welcome to Stock Flocker!' })
+      if (req.session.logged_in) {
+        res.redirect('/');
+      }
     });
   } catch (err) { 
     res.status(400).json(err);
