@@ -4,7 +4,7 @@ const { Stock } = require("../models"); // Import the Stock model using a decons
 router.get("/", async (req, res) => {
   try {
     // Added try-catch block to handle potential errors.
-    const logInStatus = req.session.logInStatus;
+    const logInStatus = req.session.logged_in;
     const stockPrices = await Stock.findAll({
       // Declare stockPrices const to get stock data.
       attributes: { include: ["id", "ticker", "company", "currentPrice"] }, // Added the attributes as outlined in the Stock model.
