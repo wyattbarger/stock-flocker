@@ -1,5 +1,5 @@
 //TODO: write this controller
-const { Post, Stock } = require("../../models");
+const { Post, Stock, Comment } = require("../../models");
 const router = require("express").Router(); // Import the router object of express with const 'router'.
 const withAuth = require("../../auth");
 // Import all necessary files
@@ -21,12 +21,46 @@ router.delete("/:id", withAuth, async (req, res) => {
   }
 });
 
+router.post("/:id/comments", withAuth, async (req, res) => {
+  try {
+    const post = await Post.findByPk(req.params.id, {
+      include: [Comment],
+    });
+    const newComment = await Comment.create({
+      ...req.body,
+      user_id: req.session.user_id,
+      post_id: post.id,
+    });
+    res.status(200).json(newComment);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+router.get("/:id/comments", withAuth, async (req, res) => {
+  try {
+    const post = await Post.findByPk(req.params.id, {
+      include: [Comment],
+    });
+    const comment = await Comment.findAll({
+      where: {
+        post_id: post.id,
+      },
+    });
+    res.status(200).json(comment);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 router.get("/", async (req, res) => {
-    try {
-        const postData = await Post.findAll();
-        res.status(200).json(postData);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-})
+  try {
+    const postData = await Post.findAll();
+    res.status(200).json(postData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;
