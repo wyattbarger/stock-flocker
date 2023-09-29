@@ -23,9 +23,47 @@
         .card:hover {
             box-shadow: 0 0 15px 4px limegreen;
         }
+       .money {
+            position: fixed;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background-color: green;
+            color: white;
+            font-weight: bold;
+            animation: fall 5s linear;
+            opacity: 0.7;
+            z-index: 9999;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
     </style>
 </head>
 <body>
+<script>
+    function createMoney() {
+        const money = document.createElement('div');
+        money.className = 'money';
+        money.innerText = '$';
+        money.style.left = Math.random() * 100 + 'vw';
+        money.style.animationDuration = Math.max(5, Math.random() * 5) + 's'; // Between 5 to 10 seconds
+        document.body.appendChild(money);
+        
+        // Remove the money div after animation complete
+        money.addEventListener('animationend', () => {
+            money.remove();
+        });
+    }
+
+    const intervalId = setInterval(createMoney, 100);
+
+    setTimeout(() => {
+        clearInterval(intervalId);
+    }, 5000);
+</script>
 
   <main class="section">
         <div class="container">
