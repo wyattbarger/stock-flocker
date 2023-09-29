@@ -37,5 +37,5 @@ app.set('views', path.join(__dirname, 'views')); // Set the template engine to r
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log('Now listening'));
+  app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
 });
