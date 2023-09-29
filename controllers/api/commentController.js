@@ -47,18 +47,23 @@ router.post('/post/:id', withAuth, async (req, res) => {
   }
 });
 // The below put route was tested in insomnia and confirmed to work with MySql workbench.
-router.put('/edit/:id', withAuth, async (req,res) => { // Added put route for a authenticated user to update their choosen comment.
-  try { // Added a try-catch block for handling errors.
-    const commentId = req.params.id; // Declare commentId variable set to request the comment id. 
-    const text = req.body.text; // Declare content variable set to the users updated text.
-    const editedComment = await Comment.update(
-      {text}, // Update the data stored in the text column of the Comment model that has been selected based off of the current comment id.
-      { where: { id: commentId }}
-    );
-    res.status(200).json({ message: 'Your changes have been updated.' }) // Log that the selected comment has been updated.
+router.put("/:id", withAuth, async (req, res) => {
+  try {
+    // Identify which comment needs to be updated, by finding its corresponding ID
+    const comment = await Comment.findByPk(req.params.id); 
+    // Compare the user's id to the id of the user that posted the comment. A mismatch will not allow a user to edit the comment.
+    if (req.session.user_id !== comment.user_id) {
+      res.status(401).json("That is not your comment");
+    } else {
+      // This method will update the body of the comment.
+      await comment.update({
+        ...req.body,
+      });
+      res.status(500).json("Changes applied");
+    }
   } catch (err) {
-    res.status(500).json({ message: 'We were unable to process you edit request. Please try again later.'}) // Log that the edit request was unseccessful.
-  } 
+    res.status(500).json(err);
+  }
 });
 // Tested this route in Insomnia and MySql workebench, both confirmed working.
 router.delete('/delete/:id', withAuth, async (req,res) => { // Added a route to delete a comment based on the comments id.

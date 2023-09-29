@@ -36,23 +36,8 @@ router.post("/:id/comments", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-router.put("/comments/:id", withAuth, async (req, res) => {
-  // Added put route for a authenticated user to update their choosen comment.
-  try {
-    // Added a try-catch block for handling errors.
-    const comment = await Comment.findByPk(req.params.id); // Declare commentId variable set to request the comment id.
-    if (req.session.user_id !== comment.user_id) {
-      res.status(401).json("That is not your comment");
-    } else {
-      await comment.update({
-        ...req.body,
-      });
-      res.status(500).json("Changes applied");
-    }
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+
+
 
 router.get("/:id/comments", withAuth, async (req, res) => {
   try {
