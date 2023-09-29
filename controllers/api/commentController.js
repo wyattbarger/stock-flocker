@@ -59,26 +59,26 @@ router.put("/:id", withAuth, async (req, res) => {
       await comment.update({
         ...req.body,
       });
-      res.status(500).json("Changes applied");
+      res.status(200).json("Changes applied");
     }
   } catch (err) {
     res.status(500).json(err);
   }
 });
 // Tested this route in Insomnia and MySql workebench, both confirmed working.
-router.delete('/delete/:id', withAuth, async (req,res) => { // Added a route to delete a comment based on the comments id.
-  try { // Added a try-catch block for handling errors.
-    const comment = await Comment.destroy({ // Declare a variable using the destroy method to delete the choosen comment.
-      where: {
-        id: req.params.id, // Added parameters so that the deleted comment targeted is done so with req.params.id, an double checks that the user is deleting a comment that belongs to them, and not someone else's.
-      },
-    });
-    if (!comment) { // Added a conditional so that the user is notified the comment they are trying to delete is unable to be found with the choosen id.
-      return res.status(404).json({ message: 'There was no comment found with that id. Confirm your selection and try again.' })
+router.delete("/:id", withAuth, async (req, res) => {
+  try {
+    const comment = await Comment.findByPk(req.params.id);
+    console.log(req.session.user_id);
+    console.log(comment.user_id);
+    if (req.session.user_id !== comment.user_id) {
+      res.status(401).json("That is not your comment.");
+    } else {
+      await comment.destroy();
+      res.status(200).json("comment deleted.");
     }
-    res.status(200).json(comment); // If the conditional isn't met then send a 200 response to the server.
   } catch (err) {
-    res.status(500).json(err); // If there is an internal server issue throw an error.
+    res.status(500).json(err);
   }
 });
 

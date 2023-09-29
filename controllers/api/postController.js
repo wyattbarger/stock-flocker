@@ -44,12 +44,12 @@ router.get("/:id/comments", withAuth, async (req, res) => {
     const post = await Post.findByPk(req.params.id, {
       include: [Comment],
     });
-    const newComment = await Comment.findAll({
+    const comment = await Comment.findAll({
       where: {
         post_id: post.id,
       },
     });
-    res.status(200).json(newComment);
+    res.status(200).json(comment);
   } catch (err) {
     res.status(500).json(err);
   }
