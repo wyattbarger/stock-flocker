@@ -9,9 +9,11 @@ const loginUser = async (event) => { // Created a loginUser async function to br
             headers: { 'Content-Type': 'application/json' }, // Indicates that the request body for the server is in JSON format.
         });
         if (serverResponse.ok) {
-            document.location.replace('/'); // Take the user back to the homepage if the serverResponse variable passes.
+            alert('Welcome to Stock Flocker!') // Take the user back to the homepage if the serverResponse variable passes.
         } else {
-            alert('There was a problem logging in. Please make sure you are uusing the correct credentials and try again.');
+            alert('There was a problem logging in. Please make sure you are uusing the correct credentials and try again.'); // Display an alert to the user if they enter incorrect login credential compared to what is stored in the database.
         }
     }
 };
+
+document.querySelector('.button.is-link').addEventListener('submit', loginUser); // Added an event listener to target the element with the class

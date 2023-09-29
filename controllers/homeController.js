@@ -4,6 +4,7 @@ const { Stock } = require("../models"); // Import the Stock model using a decons
 router.get("/", async (req, res) => {
   try {
     // Added try-catch block to handle potential errors.
+    const logInStatus = req.session.logInStatus;
     const stockPrices = await Stock.findAll({
       // Declare stockPrices const to get stock data.
       attributes: { include: ["id", "ticker", "company", "currentPrice"] }, // Added the attributes as outlined in the Stock model.
@@ -12,7 +13,7 @@ router.get("/", async (req, res) => {
 
          const stocks = stockPrices.map((stock) => stock.get({ plain: true }));
          // Added try catch to test for errors rendering the homepage.
-        res.render('homebody', {stocks}); // Added res.render to render the main template and pass it stockPrices. Accomplished by pathing into layouts setting the view as main, using the same layout.
+        res.render('homebody', {logInStatus,stocks}); // Added res.render to render the main template and pass it stockPrices. Accomplished by pathing into layouts setting the view as main, using the same layout.
         
     } catch (err) { // Catch for the try-catch block.
         console.error(err); // Log for any errors that may occur.
