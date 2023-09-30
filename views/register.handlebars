@@ -1,17 +1,11 @@
 <section class="section">
   <div class="container">
     <h1 class="title">Register for Stock Flocker</h1>
-    <form action="/register" method="post" class="box">
+    <form action="api/users/register" method="post" class="box">
       <div class="field">
         <label class="label" for="username">Username</label>
         <div class="control">
           <input class="input" type="text" id="username" name="username" required>
-        </div>
-      </div>
-      <div class="field">
-        <label class="label" for="email">Email</label>
-        <div class="control">
-          <input class="input" type="email" id="email" name="email" required>
         </div>
       </div>
       <div class="field">
@@ -28,9 +22,11 @@
       </div>
       <div class="field">
         <div class="control">
-          <button class="button is-link">Register</button>
+          <button class="button is-link" type="submit">Register</button>
         </div>
       </div>
     </form>
   </div>
 </section>
+
+<script src="/stock-flocker/public/js/register.js"></script> {{! Attached the register script to the register view. }}
