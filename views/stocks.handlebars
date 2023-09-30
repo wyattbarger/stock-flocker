@@ -32,7 +32,7 @@
                         <b>Comments:</b>
                         <ul>
                             {{#each post.comments as |comment|}}
-                                <li>{{comment.author}}: {{comment.content}}</li>
+                                <li>{{comment.user_id}}: {{comment.text}}</li>
                             {{/each}}
                         </ul>
                     </div>
