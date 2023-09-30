@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const stock = await Stock.findByPk(req.params.id, {
+    const stockData = await Stock.findByPk(req.params.id, {
       include: [
         { model: HistoricalPrice, as: "historicalPrices" },
         { model: Post, include: [Comment] },  // New Code Here: Include Posts and associated Comments
@@ -27,8 +27,8 @@ router.get("/:id", async (req, res) => {
     if (!stockData) {
       return res.status(404).json({ message: "Stock not found!" });
     }
-    const plainStock = stock.get({ plain: true }); // New Code Here: Convert to plain object
-    res.render("singleStock", { stock: plainStock }); // New Code Here: Render the stock in Handlebars view
+    const plainStock = stockData.get({ plain: true }); // New Code Here: Convert to plain object
+    res.render("stocks", { stock: plainStock }); // New Code Here: Render the stock in Handlebars view
   } catch (err) {
     res.status(500).json(err);
   }
