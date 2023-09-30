@@ -1,4 +1,4 @@
-const { Stock, HistoricalPrice, Post } = require("../../models");
+const { Stock, HistoricalPrice, Post, Comment } = require("../../models");
 const router = require("express").Router(); // Import the router object of express with const 'router'.
 const withAuth = require('../../auth');
 
@@ -15,20 +15,38 @@ router.get("/", async (req, res) => {
   }
 });
 
+
 router.get("/:id", async (req, res) => {
   try {
-    const stock = await Stock.findByPk(req.params.id, {
+    const stockData = await Stock.findByPk(req.params.id, {
       include: [{ model: HistoricalPrice, as: "historicalPrices" }],
     });
-    if (!stock) {
+    if (!stockData) {
       return res.status(404).json({ message: "Stock not found!" });
     }
-    res.render("individualStock", { layout: "main", stock });
-    res.status(200).json(stock);
+    const stock = stockData.get({ plain: true });
+    res.render("stocks", { layout: "main", stock });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const stockData = await Stock.findByPk(req.params.id, {
+//       include: [{ model: HistoricalPrice, as: "historicalPrices" }],
+//     });
+//     if (!stockData) {
+//       return res.status(404).json({ message: "Stock not found!" });
+//     }
+//     const stock = stockData.map((product) => product.get({ plain: true }));
+//     res.render("stocks", { layout: "main", stocks: stock });
+//     console.log(stock);
+//     // res.status(200).json(stock);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 router.get("/:id/posts", async (req, res) => {
   try {
