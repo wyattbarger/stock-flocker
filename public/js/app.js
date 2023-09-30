@@ -17,7 +17,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/js', express.static(path.join(__dirname, 'public/js'), {
+    setHeaders: (res, path, stat) => {
+      if (path.endsWith('.js')) {
+        res.set('Content-Type', 'application/javascript');
+      }
+    }
+  }));
+  
 // Routes
 app.get('/', (req, res) => {
     res.render('home', { title: 'Welcome to Stock Flocker' });
