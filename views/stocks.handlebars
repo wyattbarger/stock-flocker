@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Details - {{stock.name}}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">{{stock.name}} ({{stock.ticker}})</h1>
+            <img src="images/{{stock.imageFilename}}" alt="{{stock.name}} logo">
+            <p>Current Price: ${{stock.currentPrice}}</p>
+
+            <h2 class="subtitle">Historical Prices</h2>
+            <ul>
+                {{#each stock.historicalPrices as |price|}}
+                    <li>${{price}} on {{price.date}}</li>
+                {{/each}}
+            </ul>
+
+            <h2 class="subtitle">Posts</h2>
+            {{#each stock.posts as |post|}}
+                <article class="message">
+                    <div class="message-header">
+                        <p>{{post.title}}</p>
+                    </div>
+                    <div class="message-body">
+                        {{post.content}}
+                        <br>
+                        <b>Comments:</b>
+                        <ul>
+                            {{#each post.comments as |comment|}}
+                                <li>{{comment.author}}: {{comment.content}}</li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                </article>
+            {{/each}}
+        </div>
+    </section>
+</body>
+</html>
