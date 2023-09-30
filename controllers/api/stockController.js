@@ -1,6 +1,6 @@
-const { Stock, HistoricalPrice, Post, Comment } = require("../../models"); // New Code Here: Include Comment
+const { Stock, HistoricalPrice, Post, Comment, User } = require("../../models"); // New Code Here: Include Comment
 const router = require("express").Router(); // Import the router object of express with const 'router'.
-const withAuth = require('../../auth');
+const withAuth = require("../../auth");
 
 router.get("/", async (req, res) => {
   try {
@@ -15,13 +15,23 @@ router.get("/", async (req, res) => {
   }
 });
 
-
 router.get("/:id", async (req, res) => {
   try {
     const stockData = await Stock.findByPk(req.params.id, {
       include: [
         { model: HistoricalPrice, as: "historicalPrices" },
-        { model: Post, include: [Comment] },  // New Code Here: Include Posts and associated Comments
+        {
+          model: Post,
+          include: [
+            {
+              model: Comment,
+              include: [{ model: User, attributes: ["username"] }],
+            },
+            {
+              model: User, attributes: ["username"]
+            },
+          ],
+        }, // New Code Here: Include Posts and associated Comments
       ],
     });
     if (!stockData) {

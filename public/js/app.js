@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static('public')); // Test
 // app.use('/js', express.static(path.join(__dirname, 'public/js'), {
 //     setHeaders: (res, path, stat) => {
 //       if (path.endsWith('.js')) {
