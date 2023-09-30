@@ -30,4 +30,6 @@ router.get('/register', (req,res) => { // Added a GET route that will show the r
   res.render('register', {layout: 'main'}); // Added code to properly target the register view while utilizing the main layout, created by jdgiancola. 
 });
 
+
+
 module.exports = router; // Added module.exports allow the routes defined here to be used elsewhere in the application.

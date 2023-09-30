@@ -10,7 +10,7 @@
         <a class="navbar-item" href="/">Home</a> {{! This should not display when logged in. }}
         <a class="navbar-item" href="/dashboard">Dashboard</a>
         {{#if logInStatus}}
-          <a class="navbar-item" href="/logout">Log Out</a>
+          <a class="navbar-item" href="/api/users/logout">Log Out</a>
         {{else}}
         <a class="navbar-item" href="/login">Log In</a>
         <a class="navbar-item" href="/register">Register</a> {{! This should not display when logged in. }}

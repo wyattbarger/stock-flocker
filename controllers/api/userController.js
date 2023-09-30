@@ -74,5 +74,20 @@ router.post('/login', async (req,res) => { // Added a POST route for logging in.
 });
 // ... additional CRUD operations as necessary ...
 
+router.get()
+
+
+router.post('/logout', (req, res) => {
+  // When the user logs out, destroy the session
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+      console.log(req.session);
+    });
+  } else {
+    res.status(404).end();
+    console.log('error');
+  }
+});
 
 module.exports = router;
