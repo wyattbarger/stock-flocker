@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
       req.session.user_id = newUser.id;
       req.session.logged_in = true;
 
-      res.status(200).json({ message: "Account created!" });
+     res.redirect('/'); // Redirect to the homepage after the user registers successfully.
     });
   } catch (err) {
     res.status(400).json(err);
