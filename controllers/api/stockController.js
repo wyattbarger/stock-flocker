@@ -23,6 +23,7 @@ router.get("/:id", async (req, res) => {
     if (!stock) {
       return res.status(404).json({ message: "Stock not found!" });
     }
+    res.render("stockPage", { layout: "main", stock });
     res.status(200).json(stock);
   } catch (err) {
     res.status(500).json(err);

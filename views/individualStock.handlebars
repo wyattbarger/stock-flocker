@@ -11,17 +11,16 @@
     <main class="section">
         <div class="container">
             <div class="columns is-multiline">
-                {{#each stocks as |stock| }}
                     <div class="column is-one-third">
                         <div class="card">
                             <div class="card-content">
                                 <h5 class="title">{{stock.company}} ({{stock.ticker}})</h5>
                                 <p>Current Price: ${{stock.currentPrice}}</p>
                                 <a href="/api/stocks/{{stock.id}}" class="button is-primary">View Details</a>
+                                <p>{{stock}}</p>
                             </div>
                         </div>
                     </div>
-                {{/each}}
             </div>
         </div>
     </main>
