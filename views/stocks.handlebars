@@ -29,7 +29,7 @@
 
         <div class="container"> {{! Needs styling. Form to complete post route to Post }}
           <h1 class="title">Create a Post about {{stock.company}}</h1>
-          <form action="api/stocks/:id/login" method="post" class="box">
+          <form action="api/stocks/:id/login" method="post" class="box"> {{! Form uses a post route, to add content to the database via api/stocks/:id/login. Needs tested after session bug which logs a user out when viewing a stock page is fixed. }}
             <div class="field">
               <label class="label" for="title">Post Title</label>
               <div class="control">

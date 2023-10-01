@@ -112,6 +112,8 @@ async function addPost(stockId, title, content) { // Placeholder function to tes
     }
 };
 
+document.querySelector("add-post").addEventListener("click", addPost); // Add a placeholder event listener to trigger the add post function. Log in but needs fixed to test fully.
+
 // Start the server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
