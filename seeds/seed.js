@@ -5,6 +5,7 @@ const userData = require('./userData.json');
 const rawStockData = require('./stockData.json');
 const postData = require('./postData.json');
 const commentData = require('./commentData.json');
+const historicalData = require('./historicalData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -27,18 +28,22 @@ const seedDatabase = async () => {
   });
 
   // Seed historical prices after stocks
-  for (let i = 0; i < stocks.length; i++) {
-    const currentStock = stocks[i];
-    const currentRawStock = rawStockData[i];
+  // for (let i = 0; i < stocks.length; i++) {
+  //   const currentStock = stocks[i];
+  //   const currentRawStock = rawStockData[i];
 
-    const historicalPrices = currentRawStock.historicalPrices.map(price => ({
-      stock_id: currentStock.id,
-      price: price
-      // date: ... // If you need specific dates, make sure to include them in rawStockData.
-    }));
+  //   const historicalPrices = currentRawStock.historicalPrices.map(price => ({
+  //     stock_id: currentStock.id,
+  //     price: price,
+  //     date: date,
+  //   }));
 
-    await HistoricalPrice.bulkCreate(historicalPrices);
-  }
+  //   await HistoricalPrice.bulkCreate(historicalPrices);
+  // }
+
+  await HistoricalPrice.bulkCreate(historicalData, {
+    returning: true,
+  })
 
   await Post.bulkCreate(postData, {
     returning: true,

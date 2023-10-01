@@ -19,7 +19,9 @@ router.get("/:id", async (req, res) => {
   try {
     const stockData = await Stock.findByPk(req.params.id, {
       include: [
-        { model: HistoricalPrice, as: "historicalPrices" },
+        { model: HistoricalPrice
+          // , as: "historicalPrices" 
+        },
         {
           model: Post,
           include: [

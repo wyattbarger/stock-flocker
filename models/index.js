@@ -41,7 +41,7 @@ Post.belongsTo(Stock, { foreignKey: "stock_id" });
 // Stock and HistoricalPrice Relationship
 Stock.hasMany(HistoricalPrice, {
   foreignKey: "stock_id",
-  as: "historicalPrices", // Aliasing for ease of use when querying
+  // as: "historicalPrices", // Aliasing for ease of use when querying
 });
 
 HistoricalPrice.belongsTo(Stock, {
