@@ -78,7 +78,8 @@ router.get("/:id/posts", async (req, res) => {
     res.status(500).json(err);
   }
 });
-router.post("/:id/posts", withAuth, async (req, res) => {
+
+router.post("/:id", withAuth, async (req, res) => {
   try {
     const stock = await Stock.findByPk(req.params.id, {
       include: [Post],
@@ -88,7 +89,12 @@ router.post("/:id/posts", withAuth, async (req, res) => {
       user_id: req.session.user_id,
       stock_id: stock.id,
     });
-    res.status(200).json(newPost);
+    const updatedStock = await Stock.findByPk(req.params.id, {
+      include: [Post],
+    });
+    const logInStatus = req.session.logged_in;
+    const plainStock = updatedStock.get({ plain: true }); 
+    res.render("stocks", { logInStatus, stock: plainStock, newPost});;
   } catch (err) {
     res.status(500).json(err);
   }
