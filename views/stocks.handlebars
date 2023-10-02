@@ -66,8 +66,9 @@
 
         {{#each stock.posts as |post|}}
           <article class="message">
-            <div class="message-header">
+            <div class="message-header is-flex is-justify-content-space-between">
               <p>{{post.title}} by {{user.username}}</p>
+                  <button id="delete-post" class="button has-background-grey-dark is-danger is-selected" type="submit">🗑️</button>
             </div>
             <div class="message-body">
               {{post.content}}
