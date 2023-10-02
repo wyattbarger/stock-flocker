@@ -88,32 +88,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-async function addPost(stockId, title, content) { // Placeholder function to test the Post post route. 
-    try {
-      const postData = {
-        title: title,
-        content: content,
-      };
-      const response = await fetch(`/api/stocks/${stockId}/posts`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
-      });
-      if (response.ok) {
-        const newPost = await response.json();
-        console.log(newPost);
-      } else {
-        throw new Error('Failed to add post');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-};
-
-document.querySelector("add-post").addEventListener("click", addPost); // Add a placeholder event listener to trigger the add post function. Log in but needs fixed to test fully.
-
 // Start the server
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
