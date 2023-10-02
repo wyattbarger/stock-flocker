@@ -20,7 +20,9 @@ router.get("/:id", async (req, res) => {
     const logInStatus = req.session.logged_in;
     const stockData = await Stock.findByPk(req.params.id, {
       include: [
-        { model: HistoricalPrice, as: "historicalPrices" },
+        { model: HistoricalPrice
+          // , as: "historicalPrices" 
+        },
         {
           model: Post,
           include: [

@@ -18,12 +18,12 @@
         />
         <p>Current Price: ${{stock.currentPrice}}</p>
 
-        <h2 class="subtitle">Historical Prices</h2>
-        <ul>
-          {{#each stock.historicalPrices as |price|}}
-            <li>${{price.price}} on {{price.date}}</li>
-          {{/each}}
-        </ul>
+            <h2 class="subtitle">Historical Prices</h2>
+            <ul>
+                {{#each stock.historical_prices as |price|}}
+                    <li>${{price.price}} on {{price.date}}</li>
+                {{/each}}
+            </ul>
 
         <h2 class="subtitle">Join the Conversation</h2> {{! Needs styling. }}
 
