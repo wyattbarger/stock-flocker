@@ -79,21 +79,21 @@
                     {{/each}}
                 </ul>
                 </br>
-                <button  id="add-post" class="button is-primary is-rounded" type="submit">Add comment</button>
-                <div class="modal">
+                <button  id="add-comment" class="button is-primary is-rounded" type="submit">Add comment</button>
+                <div class="modal" id="commentModal">
                     <div class="modal-background"></div>
                     <div class="modal-card">
                         <header class="modal-card-head">
                             <p class="modal-card-title">Add a Comment</p>
-                            <button class="delete" aria-label="close"></button>
+                            <button class="delete" aria-label="close" id="closeModal"></button>
                         </header>
                         <section class="modal-card-body">
                             <textarea class="textarea" placeholder="Your highly valued opinion goes here!"></textarea>
                                 <!-- Content ... -->
                         </section>
                         <footer class="modal-card-foot">
-                                <button class="button is-success">Submit</button>
-                                <button class="button">Cancel</button>
+                                <button class="button is-success" id="submit-comment">Submit</button>
+                                <button class="button" id="closeModal2">Cancel</button>
                         </footer>
                     </div>
                 </div>
@@ -104,5 +104,6 @@
       </div>
     </section>
     <script src="/js/addContent.js" type="text/javascript"></script>
+    <script src="/js/addComment.js" type="text/javascript"></script>
   </body>
 </html>
