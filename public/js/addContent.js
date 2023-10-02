@@ -4,15 +4,16 @@ const addPost = async (event) => {
   const title = document.querySelector('#title').value.trim(); 
   const content = document.querySelector('#content').value.trim();
   if (title && content) {
-      const serverResponse = await fetch(`/api/stocks/${stockId}/posts`, { 
+      const serverResponse = await fetch(`/api/stocks/${stockId}`, { 
           method: 'POST',
           body: JSON.stringify({ title, content }), 
           headers: { 'Content-Type': 'application/json' }, 
       });
-      if (serverResponse.ok) {
-        document.location.replace(`/api/stocks/:id`);
+      if (serverResponse === 200) {
+        document.location.reload(); 
       } else {
-          alert('There was a problem adding your post. Please contact and admin and try again later.'); 
+          alert('There was a problem adding your post. Please contact and admin and try again later.');
+          document.location.reload(); 
       }
   }
 };
