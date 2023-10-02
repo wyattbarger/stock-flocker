@@ -70,14 +70,34 @@
               <p>{{post.title}} by {{user.username}}</p>
             </div>
             <div class="message-body">
-              {{post.content}}
-              <br />
-              <b>Comments:</b>
-              <ul>
-                {{#each post.comments as |comment|}}
-                  <li>{{user.username}}: {{comment.text}}</li>
-                {{/each}}
-              </ul>
+                {{post.content}}
+                <br />
+                <b>Comments:</b>
+                <ul>
+                    {{#each post.comments as |comment|}}
+                    <li>{{user.username}}: {{comment.text}}</li>
+                    {{/each}}
+                </ul>
+                </br>
+                <button  id="add-post" class="button is-primary is-rounded" type="submit">Add comment</button>
+                <div class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">Add a Comment</p>
+                            <button class="delete" aria-label="close"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <textarea class="textarea" placeholder="Your highly valued opinion goes here!"></textarea>
+                                <!-- Content ... -->
+                        </section>
+                        <footer class="modal-card-foot">
+                                <button class="button is-success">Submit</button>
+                                <button class="button">Cancel</button>
+                        </footer>
+                    </div>
+                </div>
+            </div>
             </div>
           </article>
         {{/each}}
