@@ -1,31 +1,27 @@
-async function addPost(stockId, title, content) { // Placeholder function to test the Post post route. 
-    try {
-      const postData = {
-        title: title,
-        content: content,
-      };
-      const response = await fetch(`/api/stocks/${stockId}/posts`, {
-        method: 'POST',
-        body: JSON.stringify(postData),
-        headers: {
-          'Content-Type': 'application/json',
-        },
+const addPost = async (event) => { 
+  event.preventDefault();
+  const stockId = window.location.pathname.split('/').pop()
+  const title = document.querySelector('#title').value.trim(); 
+  const content = document.querySelector('#content').value.trim();
+  if (title && content) {
+      const serverResponse = await fetch(`/api/stocks/${stockId}/posts`, { 
+          method: 'POST',
+          body: JSON.stringify({ title, content }), 
+          headers: { 'Content-Type': 'application/json' }, 
       });
-      if (response.ok) {
-        const newPost = await response.json();
-        console.log(newPost);
-        history.back();
+      if (serverResponse.ok) {
+        document.location.replace(`/api/stocks/:id`);
       } else {
-        alert('Failed to add post');
+          alert('There was a problem adding your post. Please contact and admin and try again later.'); 
       }
-    } catch (error) {
-      console.error(error);
-    }
+  }
 };
 
-const addPostBtn = document.querySelector("add-post");
+document.querySelector('#add-post').addEventListener('submit', addPost);
 
-addPostBtn.addEventListener('click', function(event) { // Changed the add post button logic to include a prevent defauult for testing purposes.
-    event.preventDefault();
-    addPost(stockId, title, content);
-});
+// const addPostBtn = document.querySelector("add-post");
+
+// addPostBtn.addEventListener('click', function(event) { // Changed the add post button logic to include a prevent defauult for testing purposes.
+//     event.preventDefault();
+//     addPost(stockId, title, content);
+// });
