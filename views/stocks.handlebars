@@ -1,17 +1,22 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stock Details - {{stock.company}}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+  </head>
+  <body>
     <section class="section">
-        <div class="container">
-            <h1 class="title">{{stock.company}} ({{stock.ticker}})</h1>
-            <img src="/images/{{stock.imageFilename}}" alt="{{stock.company}} logo">
-            <p>Current Price: ${{stock.currentPrice}}</p>
+      <div class="container">
+        <h1 class="title">{{stock.company}} ({{stock.ticker}})</h1>
+        <img
+          src="/images/{{stock.imageFilename}}"
+          alt="{{stock.company}} logo"
+        />
+        <p>Current Price: ${{stock.currentPrice}}</p>
 
             <h2 class="subtitle">Historical Prices</h2>
             <ul>
@@ -20,25 +25,64 @@
                 {{/each}}
             </ul>
 
-            <h2 class="subtitle">Posts</h2>
-            {{#each stock.posts as |post|}}
-                <article class="message">
-                    <div class="message-header">
-                        <p>{{post.title}} by {{user.username}}</p>
-                    </div>
-                    <div class="message-body">
-                        {{post.content}}
-                        <br>
-                        <b>Comments:</b>
-                        <ul>
-                            {{#each post.comments as |comment|}}
-                                <li>{{user.username}}: {{comment.text}}</li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </article>
-            {{/each}}
+        <h2 class="subtitle">Join the Conversation</h2> {{! Needs styling. }}
+
+        <div class="container"> {{! Needs styling. Form to complete post route to Post }}
+          <h3 class="title">Create a Post about {{stock.company}}</h3>
+          <form action="{{stock.id}}/posts" method="post" class="box"> {{! Form uses a post route, to add content to the database via api/stocks/:id/login. Needs tested after session bug which logs a user out when viewing a stock page is fixed. }}
+            <div class="field">
+              <label class="label" for="title">Post Title</label>
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  id="title"
+                  name="title"
+                  required
+                />
+              </div>
+            </div>
+            <div class="field">
+              <label class="label" for="content">Post Content</label>
+              <div class="control">
+                <textarea
+                  class="textarea"
+                  type="text"
+                  id="content"
+                  name="content"
+                  required>
+                </textarea>
+              </div>
+            </div>
+            <div class="field">
+              <div class="control">
+                <button  id="add-post" class="button is-link" type="submit">Add Post</button>
+              </div>
+            </div>
+          </form>
         </div>
+
+         <h4 class="subtitle">Posts</h4> {{! Needs styling. }}
+
+        {{#each stock.posts as |post|}}
+          <article class="message">
+            <div class="message-header">
+              <p>{{post.title}} by {{user.username}}</p>
+            </div>
+            <div class="message-body">
+              {{post.content}}
+              <br />
+              <b>Comments:</b>
+              <ul>
+                {{#each post.comments as |comment|}}
+                  <li>{{user.username}}: {{comment.text}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          </article>
+        {{/each}}
+      </div>
     </section>
-</body>
+    <script src="/stock-flocker/public/js/addContent.js" type="text/javascript"></script>
+  </body>
 </html>

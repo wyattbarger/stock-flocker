@@ -8,7 +8,6 @@
     <div class="navbar-menu">
       <div class="navbar-end">
         <a class="navbar-item" href="/">Home</a> {{! This should not display when logged in. }}
-        <a class="navbar-item" href="/dashboard">Dashboard</a>
         {{#if logInStatus}}
           <a id="logout" class="navbar-item">Log Out</a>
         {{else}}
