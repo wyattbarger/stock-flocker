@@ -23,7 +23,7 @@ HistoricalPrice.init({
     allowNull: false,
   },
   date: {  // Optional, in case you want to store the date of each price
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: true,
   }
 }, {

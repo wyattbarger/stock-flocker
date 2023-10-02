@@ -15,7 +15,7 @@
 
             <h2 class="subtitle">Historical Prices</h2>
             <ul>
-                {{#each stock.historicalPrices as |price|}}
+                {{#each stock.historical_prices as |price|}}
                     <li>${{price.price}} on {{price.date}}</li>
                 {{/each}}
             </ul>
