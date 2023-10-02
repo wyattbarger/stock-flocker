@@ -21,7 +21,23 @@ router.delete("/:id", withAuth, async (req, res) => {
   }
 });
 
-router.post("/:id/comments", withAuth, async (req, res) => {
+// router.post("/:id/comments", async (req, res) => {
+//   try {
+//     const post = await Post.findByPk(req.params.id, {
+//       include: [Comment],
+//     });
+//     const newComment = await Comment.create({
+//       ...req.body,
+//       user_id: req.session.user_id,
+//       post_id: post.id,
+//     });
+//     res.status(200).json(newComment);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
+router.post("/:id", withAuth, async (req, res) => {
   try {
     const post = await Post.findByPk(req.params.id, {
       include: [Comment],
@@ -31,11 +47,17 @@ router.post("/:id/comments", withAuth, async (req, res) => {
       user_id: req.session.user_id,
       post_id: post.id,
     });
-    res.status(200).json(newComment);
+    const updatedStock = await Stock.findByPk(req.params.id, {
+      include: [Post, Comment],
+    });
+    const logInStatus = req.session.logged_in;
+    const plainStock = updatedStock.get({ plain: true }); 
+    res.render("stocks", { logInStatus, stock: plainStock, newComment});;
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 
 

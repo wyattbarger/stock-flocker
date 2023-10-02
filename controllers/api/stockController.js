@@ -90,7 +90,23 @@ router.post("/:id", withAuth, async (req, res) => {
       stock_id: stock.id,
     });
     const updatedStock = await Stock.findByPk(req.params.id, {
-      include: [Post],
+      include: [
+        { model: HistoricalPrice
+          // , as: "historicalPrices" 
+        },
+        {
+          model: Post,
+          include: [
+            {
+              model: Comment,
+              include: [{ model: User, attributes: ["username"] }],
+            },
+            {
+              model: User, attributes: ["username"]
+            },
+          ],
+        }, // New Code Here: Include Posts and associated Comments
+      ],
     });
     const logInStatus = req.session.logged_in;
     const plainStock = updatedStock.get({ plain: true }); 
